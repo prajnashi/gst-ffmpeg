@@ -73,7 +73,9 @@ gst_ffmpeg_av_find_stream_info (AVFormatContext * ic)
   int ret;
 
   g_static_mutex_lock (&gst_avcodec_mutex);
+#ifndef ANDROID
   ret = av_find_stream_info (ic);
+#endif
   g_static_mutex_unlock (&gst_avcodec_mutex);
 
   return ret;
@@ -136,12 +138,14 @@ plugin_init (GstPlugin * plugin)
 
   gst_ffmpeg_init_pix_fmt_info ();
 
-  av_register_all ();
+  avcodec_register_all ();
 
   gst_ffmpegenc_register (plugin);
   gst_ffmpegdec_register (plugin);
+#ifndef ANDROID
   gst_ffmpegdemux_register (plugin);
   gst_ffmpegmux_register (plugin);
+#endif
   gst_ffmpegdeinterlace_register (plugin);
 #if 0
   gst_ffmpegscale_register (plugin);
@@ -151,8 +155,10 @@ plugin_init (GstPlugin * plugin)
 #endif
   gst_ffmpegaudioresample_register (plugin);
 
+#ifndef ANDROID
   register_protocol (&gstreamer_protocol);
   register_protocol (&gstpipe_protocol);
+#endif
 
   /* Now we can return the pointer to the newly created Plugin object. */
   return TRUE;
