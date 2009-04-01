@@ -12,6 +12,10 @@ LOCAL_SRC_FILES:= 		\
 			  gstffmpegdeinterlace.c	\
 			  gstffmpegaudioresample.c
 
+LOCAL_STATIC_LIBRARIES :=	\
+	libavcodec		\
+	libavutil
+
 LOCAL_SHARED_LIBRARIES := \
 	libgstbase-0.10	   \
 	libgstreamer-0.10	 \
@@ -20,9 +24,7 @@ LOCAL_SHARED_LIBRARIES := \
 	libglib-2.0		   \
 	libgthread-2.0		\
 	libgmodule-2.0		\
-	libgobject-2.0	\
-	libavcodec   \
-	libavutil
+	libgobject-2.0
 
 LOCAL_MODULE:= libgstffmpeg
 
