@@ -148,3 +148,7 @@
 /* #  undef WORDS_BIGENDIAN */
 # endif
 #endif
+
+/* Define if we build this package in Android */
+#define BUILD_WITH_ANDROID 1
+

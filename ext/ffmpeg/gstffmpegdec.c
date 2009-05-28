@@ -2652,10 +2652,17 @@ gst_ffmpegdec_register (GstPlugin * plugin)
         rank = GST_RANK_SECONDARY;
         break;
       case CODEC_ID_AAC:
+#ifdef BUILD_WITH_ANDROID
+        /* In android, we need AAC decoder, when gst-openmax is not avialable.
+         * Change rank to GST_RANK_MARGINAL to make decodebin2 find it.
+         */ 
+        rank = GST_RANK_MARGINAL;
+#else      
         /* The ffmpeg AAC decoder isn't complete, and there's no way to figure out
          * before decoding whether it will support the given stream or not.
          * We therefore set it to NONE until it can handle the full specs. */
         rank = GST_RANK_NONE;
+#endif        
         break;
       default:
         rank = GST_RANK_MARGINAL;

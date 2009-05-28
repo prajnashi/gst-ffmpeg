@@ -73,7 +73,7 @@ gst_ffmpeg_av_find_stream_info (AVFormatContext * ic)
   int ret;
 
   g_static_mutex_lock (&gst_avcodec_mutex);
-#ifndef ANDROID
+#ifndef BUILD_WITH_ANDROID
   ret = av_find_stream_info (ic);
 #endif
   g_static_mutex_unlock (&gst_avcodec_mutex);
@@ -142,7 +142,7 @@ plugin_init (GstPlugin * plugin)
 
   gst_ffmpegenc_register (plugin);
   gst_ffmpegdec_register (plugin);
-#ifndef ANDROID
+#ifndef BUILD_WITH_ANDROID
   gst_ffmpegdemux_register (plugin);
   gst_ffmpegmux_register (plugin);
 #endif
@@ -155,7 +155,7 @@ plugin_init (GstPlugin * plugin)
 #endif
   gst_ffmpegaudioresample_register (plugin);
 
-#ifndef ANDROID
+#ifndef BUILD_WITH_ANDROID
   register_protocol (&gstreamer_protocol);
   register_protocol (&gstpipe_protocol);
 #endif
