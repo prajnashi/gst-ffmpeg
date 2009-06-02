@@ -150,5 +150,5 @@
 #endif
 
 /* Define if we build this package in Android */
-#define BUILD_WITH_ANDROID 1
+#define BUILD_WITH_ANDROID 1 
 
